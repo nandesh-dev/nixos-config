@@ -127,6 +127,7 @@
                 nodePackages.prettier
                 rustywind
                 rustfmt
+                buf
               ];
               config = ''
                 require("conform").setup({
@@ -138,6 +139,7 @@
                 		javascriptreact = { "prettier", "rustywind" },
                 		rust = { "rustfmt" },
                 		go = { "gofmt" },
+                    proto = { "buf" },
                 	},
                 	format_on_save = {
                 		timeout_ms = 500,
@@ -281,6 +283,7 @@
                 tailwindcss-language-server
                 nil
                 gopls
+                buf-language-server
               ];
 
               config = ''
@@ -344,6 +347,9 @@
                 	capabilities = capabilities,
                 })
                 require("lspconfig")["gopls"].setup({
+                	capabilities = capabilities,
+                })
+                require("lspconfig")["bufls"].setup({
                 	capabilities = capabilities,
                 })
               '';

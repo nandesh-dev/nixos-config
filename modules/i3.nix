@@ -49,6 +49,9 @@
                 gtk-font-name = CaskaydiaMono Nerd Font Mono 10
                 gtk-application-prefer-dark-theme = true
               '';
+
+              home.sessionVariables.GTK_THEME = "Gruvbox-Dark"; # for gtk4
+
               xdg.configFile."picom/picom.conf".text = ''
                 #################################
                 #           Fading              #

@@ -1,4 +1,4 @@
-{ }:
+{ usernameDescription }:
 {
   system =
     { pkgs, ... }:
@@ -594,7 +594,7 @@
             pkgs.xss-lock
           ];
           config = ''
-            exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -u ~/.config/wallpaper.png -l dim --desc "Welcome Back Nandesh!"
+            exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -u ~/.config/wallpaper.png -l dim --desc "Welcome Back ${usernameDescription}!"
           '';
         }
         {

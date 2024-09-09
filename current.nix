@@ -1,9 +1,13 @@
-{
+let
   username = "nandesh";
   usernameDescription = "Nandesh";
+in
+{
+  username = username;
+  usernameDescription = usernameDescription;
   machine = import ./machines/lenovo-laptop.nix;
   modules = [
-    ((import ./modules/i3.nix) { })
+    ((import ./modules/i3.nix) { usernameDescription = usernameDescription; })
     ((import ./modules/neovim.nix) {
       enabledUnits = [
         "options"
@@ -37,7 +41,7 @@
     ((import ./modules/freefilesync.nix) { })
     ((import ./modules/go.nix) { })
     ((import ./modules/nautilus.nix) { })
-    ((import ./modules/docker.nix) { userDir = "/home/nandesh"; })
+    ((import ./modules/docker.nix) { username = username; })
     ((import ./modules/htop.nix) { })
   ];
 }

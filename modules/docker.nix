@@ -136,7 +136,7 @@
                   - TZ=Etc/UTC
                 volumes:
                   - ./sonarr:/config
-                  - ./qbittorrent/downloads:/downloads
+                  - downloads:/downloads
                   - /home/${username}/Jellyfin:/media
                 ports:
                   - 8001:8989
@@ -153,7 +153,7 @@
                   - TZ=Etc/UTC
                 volumes:
                   - ./radarr:/config
-                  - ./qbittorrent/downloads:/downloads
+                  - downloads:/downloads
                   - /home/${username}/Jellyfin:/media
                 ports:
                   - 8002:7878
@@ -187,8 +187,8 @@
                   - WEBUI_PORT=8004
                   - TORRENTING_PORT=6881
                 volumes:
-                  - ./qbittorrent/config:/config
-                  - ./qbittorrent/downloads:/downloads
+                  - ./qbittorrent:/config
+                  - downloads:/downloads
                 ports:
                   - 8004:8004
                   - 6881:6881
@@ -200,6 +200,9 @@
             networks:
               jellyfin:
                 driver: bridge
+
+            volumes:
+              downloads:
           '';
           volumes = [
             "jellyfin"

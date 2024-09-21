@@ -132,6 +132,7 @@
                 rustywind
                 rustfmt
                 buf
+                python312Packages.black
               ];
               config = ''
                 require("conform").setup({
@@ -144,6 +145,7 @@
                 		rust = { "rustfmt" },
                 		go = { "gofmt" },
                     proto = { "buf" },
+                    python = { "black" },
                 	},
                 	format_on_save = {
                 		timeout_ms = 500,
@@ -288,6 +290,7 @@
                 nil
                 gopls
                 buf-language-server
+                pyright
               ];
 
               config = ''
@@ -356,6 +359,9 @@
                 	capabilities = capabilities,
                 })
                 require("lspconfig")["bufls"].setup({
+                	capabilities = capabilities,
+                })
+                require("lspconfig")["pyright"].setup({
                 	capabilities = capabilities,
                 })
               '';

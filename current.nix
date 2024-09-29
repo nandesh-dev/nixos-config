@@ -44,5 +44,6 @@ in
     ((import ./modules/docker.nix) { username = username; })
     ((import ./modules/htop.nix) { })
     ((import ./modules/android_studio.nix) { })
+    ((import ./modules/openssh.nix) { })
   ];
 }

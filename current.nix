@@ -45,5 +45,6 @@ in
     ((import ./modules/htop.nix) { })
     ((import ./modules/android_studio.nix) { })
     ((import ./modules/openssh.nix) { })
+    ((import ./modules/postman.nix) { })
   ];
 }

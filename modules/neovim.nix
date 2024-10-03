@@ -86,10 +86,15 @@
               config = ''
                 local builtin = require("telescope.builtin")
                 vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+                vim.keymap.set("n", "<leader>ft", builtin.treesitter, {})
+                vim.keymap.set("n", "<leader>flr", builtin.lsp_references, {})
+                vim.keymap.set("n", "<leader>fld", builtin.lsp_definitions, {})
+                vim.keymap.set("n", "<leader>fli", builtin.lsp_implementations, {})
+                vim.keymap.set("n", "<leader>flt", builtin.lsp_type_definitions, {})
                 vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-                vim.keymap.set("n", "<leader>fo", builtin.oldfiles, {})
                 vim.keymap.set("n", "<leader>fs", builtin.grep_string, {})
                 vim.keymap.set("n", "<leader>fb", builtin.current_buffer_fuzzy_find, {})
+                vim.keymap.set("n", "<leader>fd", builtin.diagnostics, {})
               '';
             }
             {
@@ -108,6 +113,9 @@
                 end
 
                 require("nvim-tree").setup({
+                  filters = {
+                    enable = false,
+                  },
                 	on_attach = my_on_attach,
                 })
               '';
@@ -267,6 +275,7 @@
                   p.html
                   p.css
                   p.scss
+                  p.go
                 ]))
               ];
             }

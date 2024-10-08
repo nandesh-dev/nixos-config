@@ -11,6 +11,31 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
+  hardware.opengl = {
+    enable = true;
+  };
+
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "nvidia-x11"
+      "nvidia-settings"
+    ];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+
+    prime = {
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+
+      nvidiaBusId = "PCI:1:0:0";
+      intelBusId = "PCI:0:2:0";
+    };
+  };
+
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "ahci"

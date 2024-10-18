@@ -150,6 +150,8 @@
                 		css = { "stylelint" },
                 		javascript = { "prettier", "rustywind" },
                 		javascriptreact = { "prettier", "rustywind" },
+                		typescript = { "prettier", "rustywind" },
+                		typescriptreact = { "prettier", "rustywind" },
                 		rust = { "rustfmt" },
                 		go = { "gofmt" },
                     proto = { "buf" },

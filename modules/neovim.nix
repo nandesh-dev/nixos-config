@@ -39,6 +39,38 @@
               '';
             }
             {
+              name = "indent-blankline";
+              plugins = [ pkgs.vimPlugins.indent-blankline-nvim ];
+              config = ''
+                local indent_highlight = {
+                    "RainbowYellow",
+                    "RainbowOrange",
+                }
+
+                local scope_highlight = {
+                    "RainbowGreen",
+                }
+
+                local hooks = require "ibl.hooks"
+                hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+                    vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+                    vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+                    vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+                end)
+
+                require("ibl").setup { 
+                  indent = { 
+                    char = "╎",
+                    highlight = indent_highlight 
+                  },
+                  scope = { 
+                    char = "┃",
+                    highlight = scope_highlight,
+                  }
+                }
+              '';
+            }
+            {
               name = "stay-centered";
               plugins = [ (fromGitHub "HEAD" "arnamak/stay-centered.nvim") ];
               config = ''

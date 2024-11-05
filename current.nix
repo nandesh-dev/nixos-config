@@ -25,6 +25,7 @@ in
         "undotree"
         "telescope"
         "tailwind-fold"
+        "indent-blankline"
       ];
     })
     ((import ./modules/git.nix) { })

@@ -48,5 +48,6 @@ in
     ((import ./modules/openssh.nix) { })
     ((import ./modules/postman.nix) { })
     ((import ./modules/blender.nix) { })
+    ((import ./modules/tlp.nix) { })
   ];
 }

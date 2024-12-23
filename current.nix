@@ -49,5 +49,6 @@ in
     ((import ./modules/postman.nix) { })
     ((import ./modules/blender.nix) { })
     ((import ./modules/tlp.nix) { })
+    ((import ./modules/samba.nix) { })
   ];
 }

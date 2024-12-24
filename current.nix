@@ -50,5 +50,6 @@ in
     ((import ./modules/blender.nix) { })
     ((import ./modules/tlp.nix) { })
     ((import ./modules/samba.nix) { })
+    ((import ./modules/tailscale.nix) { })
   ];
 }

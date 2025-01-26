@@ -26,6 +26,7 @@ in
         "telescope"
         "tailwind-fold"
         "indent-blankline"
+        "distant"
       ];
     })
     ((import ./modules/git.nix) { })

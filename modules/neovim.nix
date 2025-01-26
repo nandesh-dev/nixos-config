@@ -96,6 +96,13 @@
               '';
             }
             {
+              name = "distant";
+              plugins = [ pkgs.vimPlugins.distant-nvim ];
+              config = ''
+                require('distant'):setup()
+              '';
+            }
+            {
               name = "autoclose";
               plugins = [ pkgs.vimPlugins.autoclose-nvim ];
               config = ''

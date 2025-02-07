@@ -45,6 +45,7 @@
         (import ./home/git/default/default.nix)
         (import ./home/htop/default/default.nix)
         (import ./home/i3/default/default.nix)
+        (import ./home/dunst/default/default.nix)
         (import ./home/kitty/default/default.nix)
         (import ./home/nautilus/default/default.nix)
         (import ./home/neovim/default/default.nix)

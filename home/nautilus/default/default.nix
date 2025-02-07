@@ -1,4 +1,4 @@
 { pkgs, ... }:
 {
-  home.packages = [ pkgs.gnome.nautilus ];
+  home.packages = [ pkgs.nautilus ];
 }

@@ -8,10 +8,6 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  hardware.opengl = {
-    enable = true;
-  };
-
   nixpkgs.config.allowUnfreePredicate =
     pkg:
     builtins.elem (lib.getName pkg) [
@@ -19,8 +15,12 @@
       "nvidia-settings"
     ];
 
+  hardware.graphics.enable = true;
+
   hardware.nvidia = {
     modesetting.enable = true;
+
+    open = true;
 
     prime = {
       offload = {

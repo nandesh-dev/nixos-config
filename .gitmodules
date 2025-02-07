@@ -1,0 +1,3 @@
+[submodule "home/neovim/default/.config/nvim"]
+	path = home/neovim/default/.config/nvim
+	url = https://github.com/nandesh-dev/neovim-config.git

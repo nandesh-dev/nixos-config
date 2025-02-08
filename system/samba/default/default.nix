@@ -1,23 +1,24 @@
 { pkgs, ... }:
+let
+  option = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,credentials=/etc/samba/credentials,uid=1000,gid=100";
+in
 {
   environment.systemPackages = [ pkgs.cifs-utils ];
-  fileSystems."/mnt/jellyfin" = {
-    device = "//192.168.1.32/Jellyfin";
-    fsType = "cifs";
-    options =
-      let
-        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-      in
-      [ "${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,gid=100" ];
+
+  environment.etc."samba/credentials" = {
+    source = ./etc/samba/credentials;
+    mode = "600";
   };
 
-  fileSystems."/mnt/photos" = {
+  fileSystems."/mnt/homelab/jellyfin" = {
+    device = "//192.168.1.32/Jellyfin";
+    fsType = "cifs";
+    options = [ option ];
+  };
+
+  fileSystems."/mnt/homelab/photos" = {
     device = "//192.168.1.32/Photos";
     fsType = "cifs";
-    options =
-      let
-        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-      in
-      [ "${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,gid=100" ];
+    options = [ option ];
   };
 }

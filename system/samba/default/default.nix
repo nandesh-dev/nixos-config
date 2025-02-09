@@ -21,4 +21,10 @@ in
     fsType = "cifs";
     options = [ option ];
   };
+
+  fileSystems."/mnt/homelab/documents" = {
+    device = "//192.168.1.32/Documents";
+    fsType = "cifs";
+    options = [ option ];
+  };
 }

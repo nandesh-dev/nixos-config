@@ -52,6 +52,7 @@
         (import ./home/nerdfont/default/default.nix)
         (import ./home/postman/default/default.nix)
         (import ./home/yazi/default/default.nix)
+        (import ./home/obs/default/default.nix)
       ];
       homeStateVersion = "18.09";
     }

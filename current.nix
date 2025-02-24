@@ -53,6 +53,7 @@
         (import ./home/postman/default/default.nix)
         (import ./home/yazi/default/default.nix)
         (import ./home/obs/default/default.nix)
+        (import ./home/telegram/default/default.nix)
       ];
       homeStateVersion = "18.09";
     }

@@ -11,6 +11,7 @@
     (import ./system/samba/default/default.nix)
     (import ./system/tailscale/default/default.nix)
     (import ./system/tlp/default/default.nix)
+    (import ./system/gc/default/default.nix)
   ];
   users = [
     {

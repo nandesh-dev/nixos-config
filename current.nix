@@ -40,6 +40,7 @@
       home = [
         (import ./home/android_studio/default/default.nix)
         (import ./home/blender/default/default.nix)
+        (import ./home/discord/default/default.nix)
         (import ./home/brave/default/default.nix)
         (import ./home/firefox/default/default.nix)
         (import ./home/free_file_sync/default/default.nix)

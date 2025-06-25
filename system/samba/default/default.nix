@@ -10,20 +10,8 @@ in
     mode = "600";
   };
 
-  fileSystems."/mnt/homelab/jellyfin" = {
-    device = "//192.168.1.32/Jellyfin";
-    fsType = "cifs";
-    options = [ option ];
-  };
-
-  fileSystems."/mnt/homelab/photos" = {
-    device = "//192.168.1.32/Photos";
-    fsType = "cifs";
-    options = [ option ];
-  };
-
-  fileSystems."/mnt/homelab/documents" = {
-    device = "//192.168.1.32/Documents";
+  fileSystems."/mnt/homelab" = {
+    device = "//192.168.1.32/Homelab";
     fsType = "cifs";
     options = [ option ];
   };

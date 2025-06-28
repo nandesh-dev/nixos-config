@@ -39,6 +39,7 @@
       ];
       home = [
         (import ./home/android_studio/default/default.nix)
+        (import ./home/flightgear/default/default.nix)
         (import ./home/blender/default/default.nix)
         (import ./home/discord/default/default.nix)
         (import ./home/brave/default/default.nix)

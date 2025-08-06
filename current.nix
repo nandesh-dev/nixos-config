@@ -60,6 +60,7 @@
         (import ./home/obs/default/default.nix)
         (import ./home/telegram/default/default.nix)
         (import ./home/prismlauncher/default/default.nix)
+        (import ./home/ltspice/default/default.nix)
       ];
       homeStateVersion = "18.09";
     }

@@ -20,6 +20,8 @@ in
     }) (builtins.filter (user: user.name != "root") current.users)
   );
 
+  home-manager.backupFileExtension = "bkp";
+
   home-manager.users = builtins.listToAttrs (
     map (user: {
       name = user.name;

@@ -24,13 +24,13 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Catppuccin-GTK-Dark";
-      package = pkgs.magnetic-catppuccin-gtk;
+      name = "Everforest-Dark-BL";
+      package = pkgs.everforest-gtk-theme;
     };
   };
 
   home.sessionVariables = {
-    GTK_THEME = "Catppuccin-GTK-Dark";
+    GTK_THEME = "Everforest-Dark-BL";
   };
 
   home.packages = [

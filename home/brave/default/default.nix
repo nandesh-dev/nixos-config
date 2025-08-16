@@ -6,7 +6,8 @@
     extensions = [
       { id = "nngceckbapebfimnlniiiahkandclblb"; } # bitwarden password manager
       { id = "nffaoalbilbmmfgbnbgppjihopabppdk"; } # video speed controller
-      { id = "olhelnoplefjdmncknfphenjclimckaf"; } # catppuccin color theme
+      { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; } # vimium
+      { id = "dlcadbmcfambdjhecipbnolmjchgnode"; } # everforest color theme
     ];
     commandLineArgs = [ "--force-dark-mode" ];
   };

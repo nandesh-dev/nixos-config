@@ -9,7 +9,10 @@ include poweroff.conf
 include audio.conf
 include brightness.conf
 include dex.conf
+include polybar.conf
 include workspace.conf
 include screenshot.conf
 include resize.conf
 include dmenu.conf
+
+exec --no-startup-id xrandr --output HDMI-1 --auto --right-of eDP-1

@@ -38,7 +38,9 @@
         "sound"
       ];
       home = [
+        (import ./home/vscode/default/default.nix)
         (import ./home/blueberry/default/default.nix)
+        (import ./home/connection_editor/default/default.nix)
         (import ./home/android_studio/default/default.nix)
         (import ./home/flightgear/default/default.nix)
         (import ./home/obsidian/default/default.nix)

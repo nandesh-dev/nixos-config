@@ -5,6 +5,11 @@
     recursive = true;
   };
 
+  xdg.configFile."polybar" = {
+    source = ./.config/polybar;
+    recursive = true;
+  };
+
   xdg.configFile."picom" = {
     source = ./.config/picom;
     recursive = true;
@@ -34,6 +39,7 @@
   };
 
   home.packages = [
+    pkgs.polybarFull
     pkgs.gnome-themes-extra
     pkgs.feh
     pkgs.picom

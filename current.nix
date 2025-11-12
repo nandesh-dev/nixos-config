@@ -1,5 +1,5 @@
 {
-  hardware = import ./hardware/lenovo_ideapad_320.nix;
+  hardware = import ./hardware/del_inspire_14.nix;
   system = [
     (import ./system/bluetooth/default/default.nix)
     (import ./system/boot_loader/default/default.nix)
@@ -23,7 +23,7 @@
         (import ./home/git/default/default.nix)
         (import ./home/neovim/default/default.nix)
       ];
-      homeStateVersion = "18.09";
+      homeStateVersion = "25.05";
     }
     {
       name = "nandesh";
@@ -42,7 +42,6 @@
         (import ./home/blueberry/default/default.nix)
         (import ./home/connection_editor/default/default.nix)
         (import ./home/android_studio/default/default.nix)
-        (import ./home/flightgear/default/default.nix)
         (import ./home/obsidian/default/default.nix)
         (import ./home/blender/default/default.nix)
         (import ./home/discord/default/default.nix)
@@ -66,8 +65,8 @@
         (import ./home/ltspice/default/default.nix)
         (import ./home/vicinai/default/default.nix)
       ];
-      homeStateVersion = "18.09";
+      homeStateVersion = "25.05";
     }
   ];
-  systemStateVersion = "24.05";
+  systemStateVersion = "25.05";
 }

@@ -64,6 +64,7 @@
         (import ./home/prismlauncher/default/default.nix)
         (import ./home/ltspice/default/default.nix)
         (import ./home/vicinai/default/default.nix)
+        (import ./home/development/default/default.nix)
       ];
       homeStateVersion = "25.05";
     }

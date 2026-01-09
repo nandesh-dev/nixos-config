@@ -65,6 +65,7 @@
         (import ./home/ltspice/default/default.nix)
         (import ./home/vicinai/default/default.nix)
         (import ./home/development/default/default.nix)
+        (import ./home/nextcloud/default/default.nix)
       ];
       homeStateVersion = "25.05";
     }

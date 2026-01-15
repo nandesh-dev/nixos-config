@@ -1,13 +1,14 @@
 { ... }:
 let
   current = import ./current.nix;
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
 in
 {
   imports = [
     (import "${home-manager}/nixos")
     current.hardware
-  ] ++ current.system;
+  ]
+  ++ current.system;
 
   users.users = builtins.listToAttrs (
     map (user: {

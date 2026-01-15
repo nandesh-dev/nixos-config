@@ -3,12 +3,11 @@
   services.xserver = {
     enable = true;
 
-    displayManager.gdm.enable = true;
-
     windowManager.i3.enable = true;
   };
 
   services.displayManager = {
+    gdm.enable = true;
     defaultSession = "none+i3";
   };
 }

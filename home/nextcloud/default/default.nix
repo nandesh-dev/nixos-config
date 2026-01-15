@@ -1,9 +1,10 @@
 { config, pkgs, ... }:
 let
-  nextcloud = "${pkgs.nextcloud-client}/bin/nextcloudcmd";
-  command =
-    dir:
-    "${pkgs.nextcloud-client}/bin/nextcloudcmd -n --non-interactive --path ${dir} ${dir} https://drive.kitty-velociraptor.ts.net";
+  command = local: remote: ''
+    ${pkgs.rclone}/bin/rclone sync ${local} nextcloud:${remote} \
+      --exclude "**/node_modules/" \
+      --links
+  '';
 in
 {
   systemd.user.services.nextcloud-sync = {
@@ -15,14 +16,13 @@ in
     Service = {
       Type = "oneshot";
       ExecStart = [
-        (command "Documents")
-        (command "Downloads")
-        (command "Screenshots")
+        (command "Documents" "Documents")
+        (command "Downloads" "Downloads")
+        (command "Screenshots" "Screenshots")
+        (command "Pictures" "Camera")
       ];
       KillSignal = "SIGINT";
       TimeoutStopSec = 10;
     };
   };
-
-  home.packages = [ pkgs.nextcloud-client ];
 }

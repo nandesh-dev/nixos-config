@@ -10,4 +10,16 @@ in
   home.packages = [
     pkgs.vicinae
   ];
+
+  xdg.enable = true;
+  xdg.desktopEntries."vicinae-url-handler" = {
+    name = "Vicinae Launcher";
+    exec = "${pkgs.vicinae}/bin/vicinae %u";
+    terminal = false;
+    categories = [ "Utility" ];
+    mimeType = [
+      "x-scheme-handler/vicinae"
+      "x-scheme-handler/raycast"
+    ];
+  };
 }

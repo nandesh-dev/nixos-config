@@ -1,4 +1,7 @@
 { pkgs, ... }:
 {
-  home.packages = [ pkgs.blueberry ];
+  home.packages = [
+    pkgs.blueberry
+    pkgs.gnome-bluetooth
+  ];
 }

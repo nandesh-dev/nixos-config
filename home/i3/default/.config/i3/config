@@ -14,6 +14,7 @@ include workspace.conf
 include screenshot.conf
 include resize.conf
 include vicinae.conf
+include float.conf
 
 exec --no-startup-id xrandr --output HDMI-1 --auto --right-of eDP-1
 exec --no-startup-id xset dpms 0 0 60

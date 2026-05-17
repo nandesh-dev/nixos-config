@@ -10,6 +10,8 @@
     pkgs.rustfmt
     pkgs.buf
     pkgs.python312Packages.black
+    pkgs.python314Packages.pylatexenc
+    pkgs.tree-sitter
     pkgs.ripgrep
     pkgs.xclip
     pkgs.gcc14

@@ -14,9 +14,9 @@
   time.timeZone = "Europe/Kyiv";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  users.users.yurii = {
+  users.users.nandesh = {
     isNormalUser = true;
-    initialPassword = "12345";
+    initialPassword = "1234";
     extraGroups = [ "wheel" ];
     packages = with pkgs; [
       tree

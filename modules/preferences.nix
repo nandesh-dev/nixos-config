@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
-  flake.nixosModules.template =
+  flake.nixosModules.preferences =
     { pkgs, lib, ... }:
     {
       time.timeZone = "Europe/Kyiv";

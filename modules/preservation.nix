@@ -1,10 +1,6 @@
 { self, inputs, ... }:
 {
-  inputs = {
-    preservation.url = "github:nix-community/preservation";
-  };
-
-  flake.nixosModules.template =
+  flake.nixosModules.preservation =
     { pkgs, lib, ... }:
     {
       preservation = {

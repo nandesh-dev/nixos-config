@@ -1,10 +1,18 @@
-{ self, inputs, ... }:
+{
+  self,
+  pkgs,
+  inputs,
+  config,
+  ...
+}:
 {
   flake.nixosConfiguration.desktop = inputs.nixpkgs.lib.nixosSystem {
     modules = [
       self.nixosModules.boot
+      self.nixosModules.disko
       self.nixosModules.network
       self.nixosModules.preferences
+      self.nixosModules.preservation
     ];
 
     users.users.nandesh = {

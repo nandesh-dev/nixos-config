@@ -1,12 +1,5 @@
 { self, inputs, ... }:
 {
-  inputs = {
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
-
   flake.nixosModules.disko =
     { pkgs, lib, ... }:
     {

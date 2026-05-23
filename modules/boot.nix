@@ -15,16 +15,16 @@
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
 
-      boot.initrd.availableKernalModules = [
+      boot.initrd.availableKernelModules = [
         "xhci_pci"
-        "ahchi"
+        "ahci"
         "usbhid"
         "sd_mod"
         "sr_mod"
       ];
-      boot.initrd.kernalModules = [ ];
+      boot.initrd.kernelModules = [ ];
 
-      boot.kernalModules = [ ];
+      boot.kernelModules = [ ];
       boot.extraModulePackages = [ ];
 
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

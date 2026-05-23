@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.nixosConfiguration.desktop = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.desktop = inputs.nixpkgs.lib.nixosSystem {
     modules = [
       self.nixosModules.boot
       self.nixosModules.disko

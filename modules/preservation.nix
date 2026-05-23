@@ -3,6 +3,10 @@
   flake.nixosModules.preservation =
     { pkgs, lib, ... }:
     {
+      imports = [
+        inputs.preservation.nixosModules.default
+      ];
+
       preservation = {
         enable = true;
 

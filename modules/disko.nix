@@ -3,6 +3,10 @@
   flake.nixosModules.disko =
     { pkgs, lib, ... }:
     {
+      imports = [
+        inputs.disko.nixosModules.default
+      ];
+
       fileSystems."/nix".neededForBoot = true;
 
       disko.devices.nodev = {

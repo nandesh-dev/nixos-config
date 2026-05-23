@@ -8,7 +8,7 @@
       ...
     }:
     {
-      imports = [ inputs.niri.nixosModules.default ];
+      imports = [ inputs.niri.nixosModules ];
 
       programs.niri.enable = true;
 
@@ -28,18 +28,15 @@
   flake.homeModules.niri =
     { pkgs, lib, ... }:
     {
-      imports = [ inputs.niri.homeModules.default ];
+      imports = [ inputs.niri.homeModules ];
 
       programs.niri = {
         enable = true;
 
         settings.binds = {
-          "Mod+Return".action = {
+          "Mod+Return" = {
             repeat = false;
-            spawn = [
-              lib.getExe
-              pkgs.kitty
-            ];
+            action.spawn = lib.getExe pkgs.kitty;
           };
           "Mod+Q".action.close-window = null;
         };

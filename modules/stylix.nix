@@ -4,7 +4,7 @@
     { pkgs, lib, ... }:
     {
       imports = [
-        inputs.stylix.nixosModules.stylix
+        inputs.stylix.homeModules.stylix
       ];
 
       stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-cave-light.yaml";

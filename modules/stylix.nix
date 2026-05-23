@@ -7,6 +7,9 @@
         inputs.stylix.homeModules.stylix
       ];
 
-      stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-cave-light.yaml";
+      stylix = {
+        enable = true;
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-cave-light.yaml";
+      };
     };
 }

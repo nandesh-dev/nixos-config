@@ -13,9 +13,10 @@
       self.nixosModules.boot
       self.nixosModules.disko
       self.nixosModules.network
+      self.nixosModules.niri
+      self.nixosModules.nix
       self.nixosModules.preferences
       self.nixosModules.preservation
-      self.nixosModules.niri
       (
         { pkgs, config, ... }:
         {

@@ -39,7 +39,7 @@
               pkgs.kitty
             ];
           };
-          "Mod+Q".action = close-window;
+          "Mod+Q".action.close-window = null;
         };
       };
     };

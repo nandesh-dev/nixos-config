@@ -45,6 +45,8 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
+
+            users.nandesh = self.homeConfigurations.nandesh;
           };
         }
       )

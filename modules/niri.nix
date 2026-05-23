@@ -28,7 +28,7 @@
   flake.homeModules.niri =
     { pkgs, lib, ... }:
     {
-      imports = [ inputs.niri.homeModules ];
+      imports = [ inputs.niri.homeModules.niri ];
 
       programs.niri = {
         enable = true;
@@ -38,7 +38,7 @@
             repeat = false;
             action.spawn = lib.getExe pkgs.kitty;
           };
-          "Mod+Q".action.close-window = null;
+          "Mod+Q".action.close-window = { };
         };
       };
     };

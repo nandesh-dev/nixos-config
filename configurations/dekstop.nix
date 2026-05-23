@@ -4,6 +4,10 @@
   ...
 }:
 {
+  imports = [
+    inputs.home-manager.flakeModules.home-manager
+  ];
+
   flake.nixosConfigurations.desktop = inputs.nixpkgs.lib.nixosSystem {
     modules = [
       self.nixosModules.boot
@@ -11,9 +15,14 @@
       self.nixosModules.network
       self.nixosModules.preferences
       self.nixosModules.preservation
+      self.nixosModules.niri
       (
         { pkgs, config, ... }:
         {
+          imports = [
+            inputs.home-manager.nixosModules.default
+          ];
+
           users.users.nandesh = {
             isNormalUser = true;
             initialPassword = "1234";
@@ -26,27 +35,31 @@
           environment.systemPackages = with pkgs; [
             vim
             neovim
+            git
           ];
-
-          programs.niri.enable = true;
-
-          services.greetd = {
-            enable = true;
-            settings = {
-              default_session = {
-                command = "${config.programs.niri.package}/bin/niri-session";
-                user = "nandesh";
-              };
-            };
-          };
-
-          systemd.user.services.niri.enableDefaultPath = false;
 
           services.openssh.enable = true;
 
           system.stateVersion = "25.11";
+
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+          };
         }
       )
+    ];
+  };
+
+  flake.homeConfigurations.nandesh = inputs.home-manager.lib.homeManagerConfiguration {
+    pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
+    modules = [
+      self.homeModules.niri
+      {
+        home.username = "nandesh";
+        home.homeDirectory = "/home/nandesh";
+        home.stateVersion = "25.11";
+      }
     ];
   };
 }

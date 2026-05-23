@@ -8,10 +8,6 @@
       ...
     }:
     {
-      imports = [ inputs.niri.nixosModules ];
-
-      programs.niri.enable = true;
-
       services.greetd = {
         enable = true;
         settings = {
@@ -21,8 +17,6 @@
           };
         };
       };
-
-      systemd.user.services.niri.enableDefaultPath = false;
     };
 
   flake.homeModules.niri =

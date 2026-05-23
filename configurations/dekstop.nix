@@ -46,7 +46,9 @@
             useGlobalPkgs = true;
             useUserPackages = true;
 
-            users.nandesh = self.homeConfigurations.nandesh;
+            users.nandesh = {
+              imports = [ self.homeConfigurations.nandesh ];
+            };
           };
         }
       )

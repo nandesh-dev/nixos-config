@@ -55,6 +55,7 @@
             users.nandesh = {
               imports = [
                 self.homeModules.niri
+                self.homeModules.stylix
                 {
                   home.username = "nandesh";
                   home.homeDirectory = "/home/nandesh";

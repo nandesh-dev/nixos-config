@@ -27,12 +27,21 @@
       programs.niri = {
         enable = true;
 
-        settings.binds = {
-          "Mod+Return" = {
-            repeat = false;
-            action.spawn = lib.getExe pkgs.kitty;
+        settings = {
+          input = {
+            mod-key = "Alt";
           };
-          "Mod+Q".action.close-window = { };
+          binds = {
+            "Mod+Return" = {
+              repeat = false;
+              action.spawn = lib.getExe pkgs.kitty;
+            };
+            "Mod+D" = {
+              repeat = false;
+              action.spawn = lib.getExe pkgs.vicinae;
+            };
+            "Mod+Q".action.close-window = { };
+          };
         };
       };
     };

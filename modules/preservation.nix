@@ -14,6 +14,7 @@
           directories = [
             "/etc/nixos"
             "/var/lib/bluetooth"
+            "/var/db/sudo/lectured"
             {
               directory = "/var/lib/nixos";
               inInitrd = true;
@@ -27,17 +28,10 @@
             }
           ];
 
-          # Preserve user files
-          # users.yurii = {
-          #   directories = [
-          #     ".ssh"
-          #     ".mozilla"
-          #   ];
-          #
-          #   files = [
-          #
-          #   ];
-          # };
+          users.yurii = {
+            directories = [ ];
+            files = [ ];
+          };
         };
       };
     };

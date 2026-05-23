@@ -46,24 +46,17 @@
             useGlobalPkgs = true;
             useUserPackages = true;
 
-            users.nandesh = {
-              imports = [ self.homeConfigurations.nandesh ];
-            };
+            users.nandesh = [
+              self.homeModules.niri
+              {
+                home.username = "nandesh";
+                home.homeDirectory = "/home/nandesh";
+                home.stateVersion = "25.11";
+              }
+            ];
           };
         }
       )
-    ];
-  };
-
-  flake.homeConfigurations.nandesh = inputs.home-manager.lib.homeManagerConfiguration {
-    pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
-    modules = [
-      self.homeModules.niri
-      {
-        home.username = "nandesh";
-        home.homeDirectory = "/home/nandesh";
-        home.stateVersion = "25.11";
-      }
     ];
   };
 }

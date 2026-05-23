@@ -42,18 +42,25 @@
 
           system.stateVersion = "25.11";
 
+          environment.pathsToLink = [
+            "/share/applications"
+            "/share/xdg-desktop-portal"
+          ];
+
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
 
-            users.nandesh = [
-              self.homeModules.niri
-              {
-                home.username = "nandesh";
-                home.homeDirectory = "/home/nandesh";
-                home.stateVersion = "25.11";
-              }
-            ];
+            users.nandesh = {
+              imports = [
+                self.homeModules.niri
+                {
+                  home.username = "nandesh";
+                  home.homeDirectory = "/home/nandesh";
+                  home.stateVersion = "25.11";
+                }
+              ];
+            };
           };
         }
       )

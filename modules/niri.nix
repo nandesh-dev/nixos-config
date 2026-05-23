@@ -8,6 +8,8 @@
       ...
     }:
     {
+      imports = [ inputs.niri.nixosModules.default ];
+
       programs.niri.enable = true;
 
       services.greetd = {
@@ -24,9 +26,9 @@
     };
 
   flake.homeModules.niri =
-    { pkgs, ... }:
+    { pkgs, lib, ... }:
     {
-      imports = [ inputs.niri.homeModules.niri ];
+      imports = [ inputs.niri.homeModules.default ];
 
       programs.niri = {
         enable = true;

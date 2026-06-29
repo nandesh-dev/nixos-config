@@ -17,6 +17,10 @@
       self.nixosModules.nix
       self.nixosModules.preferences
       self.nixosModules.preservation
+      self.nixosModules.bluetooth
+      self.nixosModules.power
+      self.nixosModules.nautilus
+      self.nixosModules.sops
       (
         { pkgs, config, ... }:
         {
@@ -28,38 +32,31 @@
             isNormalUser = true;
             initialPassword = "1234";
             extraGroups = [ "wheel" ];
-            packages = with pkgs; [
-              tree
-            ];
           };
 
           environment.systemPackages = with pkgs; [
-            vim
-            neovim
+            nano
             git
           ];
 
-          services.openssh.enable = true;
-
-          system.stateVersion = "25.11";
-
-          environment.pathsToLink = [
-            "/share/applications"
-            "/share/xdg-desktop-portal"
-          ];
+          system.stateVersion = "26.05";
 
           home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-
             users.nandesh = {
               imports = [
+                self.homeModules.kitty
                 self.homeModules.niri
                 self.homeModules.stylix
+                self.homeModules.brave
+                self.homeModules.neovim
+                self.homeModules.noctalia
+                self.homeModules.gtk
+                self.homeModules.arduino
+                self.homeModules.git
                 {
                   home.username = "nandesh";
                   home.homeDirectory = "/home/nandesh";
-                  home.stateVersion = "25.11";
+                  home.stateVersion = "26.05";
                 }
               ];
             };

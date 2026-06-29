@@ -16,6 +16,10 @@
             "/var/lib/bluetooth"
             "/var/db/sudo/lectured"
             {
+              directory = "/var/lib/sops";
+              inInitrd = true;
+            }
+            {
               directory = "/var/lib/nixos";
               inInitrd = true;
             }
@@ -28,8 +32,15 @@
             }
           ];
 
-          users.yurii = {
-            directories = [ ];
+          users.nandesh = {
+            directories = [
+              ".local/"
+              ".cache/"
+              ".config/BraveSoftware/Brave-Browser"
+              ".arduinoIDE"
+              ".arduino15"
+              "Documents"
+            ];
             files = [ ];
           };
         };

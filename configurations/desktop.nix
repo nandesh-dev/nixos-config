@@ -21,6 +21,7 @@
       self.nixosModules.power
       self.nixosModules.nautilus
       self.nixosModules.sops
+      self.nixosModules.pipewire
       (
         { pkgs, config, ... }:
         {
@@ -37,10 +38,12 @@
           environment.systemPackages = with pkgs; [
             nano
             git
+            alacritty
           ];
 
           system.stateVersion = "26.05";
 
+          programs.dconf.enable = true; # required for home-manager to work
           home-manager = {
             users.nandesh = {
               imports = [
@@ -53,6 +56,7 @@
                 self.homeModules.gtk
                 self.homeModules.arduino
                 self.homeModules.git
+                self.homeModules.telegram
                 {
                   home.username = "nandesh";
                   home.homeDirectory = "/home/nandesh";

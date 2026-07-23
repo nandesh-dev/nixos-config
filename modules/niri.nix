@@ -32,6 +32,8 @@
             mod-key = "Alt";
           };
 
+          prefer-no-csd = true;
+
           workspaces = {
             "01-primary" = {
               name = "primary";
@@ -105,6 +107,8 @@
           xwayland-satellite = {
             path = (lib.getExe pkgs.xwayland-satellite);
           };
+
+          screenshot-path = "~/Screenshots/%Y-%m-%d_%H-%M-%S.png";
 
           binds = {
             "Mod+Return" = {
@@ -183,6 +187,14 @@
             "Mod+Equal".action.switch-preset-column-width = { };
 
             "Mod+F".action.maximize-column = { };
+
+            "Print".action.screenshot = {
+              show-pointer = false;
+            };
+            "Mod+Print".action.screenshot-screen = {
+              show-pointer = false;
+            };
+            "Ctrl+Print".action.screenshot-window = { };
           };
         };
       };

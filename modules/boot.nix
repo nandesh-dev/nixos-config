@@ -17,8 +17,9 @@
           enable = true;
           device = "nodev";
           efiSupport = true;
+          efiInstallAsRemovable = true;
+          theme = pkgs.minimal-grub-theme;
         };
-        efi.canTouchEfiVariables = true;
       };
 
       boot.initrd.availableKernelModules = [

@@ -8,6 +8,7 @@
       ];
 
       fileSystems."/nix".neededForBoot = true;
+      fileSystems."/persistent".neededForBoot = true;
 
       disko.devices.nodev = {
         "/" = {
@@ -20,7 +21,7 @@
       };
 
       disko.devices.disk.main = {
-        device = "/dev/sda";
+        device = "/dev/nvme0n1";
         type = "disk";
 
         content.type = "gpt";

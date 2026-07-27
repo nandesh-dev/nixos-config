@@ -11,6 +11,7 @@
   flake.nixosConfigurations.desktop = inputs.nixpkgs.lib.nixosSystem {
     modules = [
       self.nixosModules.boot
+      self.nixosModules.hardware
       self.nixosModules.disko
       self.nixosModules.network
       self.nixosModules.niri
@@ -22,6 +23,7 @@
       self.nixosModules.nautilus
       self.nixosModules.sops
       self.nixosModules.pipewire
+      self.nixosModules.docker
       (
         { pkgs, config, ... }:
         {
@@ -32,7 +34,11 @@
           users.users.nandesh = {
             isNormalUser = true;
             initialPassword = "1234";
-            extraGroups = [ "wheel" ];
+            extraGroups = [
+              "wheel"
+              "networkmanager"
+              "docker"
+            ];
           };
 
           environment.systemPackages = with pkgs; [

@@ -15,22 +15,37 @@
         age.keyFile = "/var/lib/sops/keys.txt";
         defaultSopsFile = ./../secrets.yaml;
 
-        secrets.github = {
-          owner = config.users.users.nandesh.name;
+        secrets = {
+          wifi = { };
         };
 
-        templates."gh-hosts" = {
+        templates."wifi" = {
           content = ''
-            github.com:
-              users:
-                nandesh-dev:
-                  oauth_token: ${config.sops.placeholder.github}
-              git_protocol: https
-              oauth_token: ${config.sops.placeholder.github}
-              user: nandesh-dev
+            [connection]
+            id=Nandesh
+            uuid=64a381c3-98ce-47ed-abb8-20229b367bcb
+            type=wifi
+            interface-name=wlp0s20f3
+
+            [wifi]
+            mode=infrastructure
+            ssid=Nandesh
+
+            [wifi-security]
+            auth-alg=open
+            key-mgmt=wpa-psk
+            psk=${config.sops.placeholder.wifi}
+
+            [ipv4]
+            method=auto
+
+            [ipv6]
+            addr-gen-mode=default
+            method=auto
+
+            [proxy]
           '';
-          owner = config.users.users.nandesh.name;
-          path = "/home/${config.users.users.nandesh.name}/.config/gh/hosts.yml";
+          path = "/etc/NetworkManager/system-connections/Nandesh.nmconnection";
         };
       };
     };

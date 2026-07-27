@@ -15,10 +15,7 @@
             "/etc/nixos"
             "/var/lib/bluetooth"
             "/var/db/sudo/lectured"
-            {
-              directory = "/var/lib/sops";
-              inInitrd = true;
-            }
+            "/var/lib/docker/"
             {
               directory = "/var/lib/nixos";
               inInitrd = true;
@@ -27,8 +24,14 @@
 
           files = [
             {
+              file = "/var/lib/sops/keys.txt";
+              inInitrd = true;
+            }
+            {
               file = "/etc/machine-id";
               inInitrd = true;
+              how = "symlink";
+              configureParent = true;
             }
           ];
 
@@ -44,6 +47,19 @@
             files = [ ];
           };
         };
+      };
+
+      systemd.suppressedSystemUnits = [ "systemd-machine-id-commit.service" ];
+
+      systemd.services.systemd-machine-id-commit = {
+        unitConfig.ConditionPathIsMountPoint = [
+          ""
+          "/persistent/etc/machine-id"
+        ];
+        serviceConfig.ExecStart = [
+          ""
+          "systemd-machine-id-setup --commit --root /persistent"
+        ];
       };
     };
 }

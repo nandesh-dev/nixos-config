@@ -4,8 +4,20 @@
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        git
         gh
       ];
+
+      programs.git = {
+        enable = true;
+        settings = {
+          user = {
+            name = "nandesh-dev";
+            email = "nandesh.dev@gmail.com";
+          };
+          push = {
+            autoSetupRemote = true;
+          };
+        };
+      };
     };
 }

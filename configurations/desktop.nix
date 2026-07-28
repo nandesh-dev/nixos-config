@@ -24,6 +24,7 @@
       self.nixosModules.sops
       self.nixosModules.pipewire
       self.nixosModules.docker
+      self.nixosModules.ssl
       (
         { pkgs, config, ... }:
         {

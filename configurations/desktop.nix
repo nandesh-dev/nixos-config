@@ -35,6 +35,7 @@
           users.users.nandesh = {
             isNormalUser = true;
             initialPassword = "1234";
+            hashedPasswordFile = config.sops.secrets.password.path;
             extraGroups = [
               "wheel"
               "networkmanager"

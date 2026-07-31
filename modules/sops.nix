@@ -7,6 +7,8 @@
         inputs.sops-nix.nixosModules.sops
       ];
 
+      environment.systemPackages = [ pkgs.sops ];
+
       environment.sessionVariables = {
         SOPS_AGE_KEY_FILE = "/var/lib/sops/keys.txt";
       };
@@ -16,7 +18,12 @@
         defaultSopsFile = ./../secrets.yaml;
 
         secrets = {
-          wifi = { };
+          wifiHome = {
+            key = "wifi/home";
+          };
+          password = {
+            neededForUsers = true;
+          };
         };
 
         templates."wifi" = {
@@ -34,7 +41,7 @@
             [wifi-security]
             auth-alg=open
             key-mgmt=wpa-psk
-            psk=${config.sops.placeholder.wifi}
+            psk=${config.sops.placeholder.wifiHome}
 
             [ipv4]
             method=auto

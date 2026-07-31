@@ -1,0 +1,73 @@
+name: Export Neovim Config
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "modules/home/neovim/**"
+      - "flake.nix"
+      - "flake.lock"
+
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Enable cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Build Home Manager config
+        run: |
+          nix build .#homeConfigurations.nvim.activationPackage
+
+      - name: Generate config
+        run: |
+          mkdir -p /home/nvim
+
+          HOME=/home/nvim \
+          USER=nvim \
+          ./result/activate
+
+      - name: Collect config
+        run: |
+          mkdir export
+          cp -r /home/nvim/.config/nvim export/
+
+      - name: Checkout destination repository
+        uses: actions/checkout@v4
+        with:
+          repository: YOUR_USERNAME/nvim-config
+          token: ${{ secrets.NVIM_REPO_TOKEN }}
+          path: target
+
+      - name: Update repository
+        run: |
+          rm -rf target/*
+          cp -r export/nvim target/
+
+          cd target
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add .
+
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+
+          git commit -m "Update from Nix"
+          git push

@@ -16,6 +16,8 @@
             "/var/lib/bluetooth"
             "/var/db/sudo/lectured"
             "/var/lib/docker/"
+            "/var/log"
+            "/etc/NetworkManager/system-connections/"
             {
               directory = "/var/lib/nixos";
               inInitrd = true;
@@ -44,7 +46,9 @@
               ".arduino15"
               "Documents"
             ];
-            files = [ ];
+            files = [
+              ".ssh/known_hosts"
+            ];
           };
         };
       };

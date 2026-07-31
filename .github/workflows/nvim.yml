@@ -75,5 +75,7 @@ jobs:
             exit 0
           fi
 
-          git commit -m "Update from Nix"
-          git push
+          SOURCE_SHA=$(git rev-parse HEAD)
+
+          git commit -m "$(git log -1 --pretty=%s)
+          source: https://github.com/nandesh-dev/nixos-config/commit/${SOURCE_SHA}"

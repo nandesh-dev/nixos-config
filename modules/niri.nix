@@ -34,6 +34,12 @@
 
           prefer-no-csd = true;
 
+          outputs = {
+            "eDP-1" = {
+              scale = 1;
+            };
+          };
+
           workspaces = {
             "01-primary" = {
               name = "primary";
@@ -62,6 +68,7 @@
             preset-column-widths = [
               { proportion = 0.3; }
               { proportion = 0.5; }
+              { proportion = 0.7; }
               { proportion = 1.0; }
             ];
           };
@@ -178,10 +185,11 @@
             "Mod+Ctrl+J".action.focus-monitor-down = { };
             "Mod+Ctrl+K".action.focus-monitor-up = { };
 
-            "Mod+Ctrl+Left".action.focus-monitor-left = { };
-            "Mod+Ctrl+Right".action.focus-monitor-right = { };
-            "Mod+Ctrl+Down".action.focus-monitor-down = { };
-            "Mod+Ctrl+Up".action.focus-monitor-up = { };
+            "Mod+Ctrl+1".action.focus-monitor = "eDP-1";
+            "Mod+Ctrl+2".action.focus-monitor = "HDMI-A-1";
+
+            "Mod+Shift+Ctrl+1".action.move-window-to-monitor = "eDP-1";
+            "Mod+Shift+Ctrl+2".action.move-window-to-monitor = "HDMI-A-1";
 
             "Mod+Minus".action.switch-preset-column-width-back = { };
             "Mod+Equal".action.switch-preset-column-width = { };

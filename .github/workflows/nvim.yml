@@ -23,6 +23,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y dbus
+
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
 
@@ -44,7 +49,7 @@ jobs:
       - name: Collect config
         run: |
           mkdir export
-          cp -r /home/nvim/.config/nvim export/
+          cp -r /tmp/nvim/.config/nvim export/
 
       - name: Checkout destination repository
         uses: actions/checkout@v4

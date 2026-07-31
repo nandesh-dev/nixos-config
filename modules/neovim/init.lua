@@ -8,6 +8,7 @@ vim.pack.add({
 	"https://github.com/hrsh7th/nvim-cmp",
 	"https://github.com/stevearc/conform.nvim",
 	"https://github.com/neovim/nvim-lspconfig",
+	"https://github.com/arnamak/stay-centered.nvim",
 })
 
 vim.o.number = true
@@ -66,6 +67,7 @@ require("conform").setup({
 })
 require("harpoon").setup()
 require("telescope").setup()
+require("stay-centered").setup()
 
 vim.lsp.enable({
 	"nil",

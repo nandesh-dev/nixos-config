@@ -2,10 +2,11 @@ name: Export Neovim Config
 
 on:
   push:
-    branches:
-      - main
     paths:
-      - "modules/home/neovim/**"
+      - ".github/**"
+      - "configurations/nvim.nix"
+      - "modules/neovim/**"
+      - "modules/stylix.nix"
       - "flake.nix"
       - "flake.lock"
 
@@ -48,7 +49,7 @@ jobs:
       - name: Checkout destination repository
         uses: actions/checkout@v4
         with:
-          repository: YOUR_USERNAME/nvim-config
+          repository: nandesh-dev/neovim-config
           token: ${{ secrets.NVIM_REPO_TOKEN }}
           path: target
 

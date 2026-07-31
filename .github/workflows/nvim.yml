@@ -79,3 +79,4 @@ jobs:
 
           git commit -m "$(git log -1 --pretty=%s)
           source: https://github.com/nandesh-dev/nixos-config/commit/${SOURCE_SHA}"
+          git push

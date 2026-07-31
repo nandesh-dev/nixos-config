@@ -14,7 +14,7 @@
       self.homeModules.neovim
       {
         home.username = "nvim";
-        home.homeDirectory = "/home/nvim";
+        home.homeDirectory = "/tmp/nvim";
         home.stateVersion = "26.05";
       }
     ];

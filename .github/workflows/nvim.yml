@@ -35,9 +35,9 @@ jobs:
 
       - name: Generate config
         run: |
-          mkdir -p /home/nvim
+          mkdir -p /tmp/nvim
 
-          HOME=/home/nvim \
+          HOME=/tmp/nvim \
           USER=nvim \
           ./result/activate
 

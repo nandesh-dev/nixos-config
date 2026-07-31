@@ -49,4 +49,25 @@
         };
       };
     };
+
+  flake.homeModules.sops =
+    { config, ... }:
+    {
+      imports = [
+        inputs.sops-nix.homeManagerModules.sops
+      ];
+
+      sops = {
+        age.keyFile = "/var/lib/sops/keys.txt";
+        defaultSopsFile = ../secrets.yaml;
+
+        secrets = {
+          ssh = {
+            path = "${config.home.homeDirectory}/.ssh/id_ed25519";
+            mode = "0600";
+          };
+        };
+      };
+    };
+
 }

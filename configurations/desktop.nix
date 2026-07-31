@@ -64,6 +64,8 @@
                 self.homeModules.arduino
                 self.homeModules.git
                 self.homeModules.telegram
+                self.homeModules.ssh
+                self.homeModules.sops
                 {
                   home.username = "nandesh";
                   home.homeDirectory = "/home/nandesh";

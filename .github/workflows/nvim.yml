@@ -61,7 +61,7 @@ jobs:
       - name: Update repository
         run: |
           rm -rf target/*
-          cp -r export/nvim target/
+          cp -aL export/nvim/. target/
 
           cd target
 

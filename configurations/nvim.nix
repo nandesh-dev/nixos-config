@@ -1,6 +1,7 @@
 {
   self,
   inputs,
+  lib,
   ...
 }:
 {
@@ -16,6 +17,7 @@
         home.username = "nvim";
         home.homeDirectory = "/tmp/nvim";
         home.stateVersion = "26.05";
+        dconf.enable = lib.mkForce false;
       }
     ];
   };

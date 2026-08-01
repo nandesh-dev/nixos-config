@@ -41,14 +41,14 @@
             directories = [
               ".local/"
               ".cache/"
+              ".ssh/"
               ".config/BraveSoftware/Brave-Browser"
               ".arduinoIDE"
               ".arduino15"
               "Documents"
+              "Projects"
             ];
-            files = [
-              ".ssh/known_hosts"
-            ];
+            files = [ ];
           };
         };
       };

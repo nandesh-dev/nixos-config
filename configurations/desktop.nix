@@ -65,6 +65,7 @@
                 self.homeModules.arduino
                 self.homeModules.git
                 self.homeModules.telegram
+                self.homeModules.development
                 self.homeModules.ssh
                 self.homeModules.sops
                 {

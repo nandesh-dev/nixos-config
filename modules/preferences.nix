@@ -3,7 +3,8 @@
   flake.nixosModules.preferences =
     { pkgs, lib, ... }:
     {
-      time.timeZone = "Europe/Kyiv";
+      services.timesyncd.enable = true;
+      time.timeZone = "Asia/Kolkata";
       i18n.defaultLocale = "en_US.UTF-8";
     };
 }

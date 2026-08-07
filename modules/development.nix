@@ -1,10 +1,15 @@
 { self, inputs, ... }:
 {
-  flake.homeModules.neovim =
-    { pkgs, lib, ... }:
+  flake.homeModules.development =
+    {
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
     {
       home.sessionVariables = {
-        npm_config_store_dir = "${config.home.homeDirectory}/.cache/pnpm-store";
+        PNPM_HOME = "${config.home.homeDirectory}/.cache/pnpm-store";
       };
 
       home.packages = with pkgs; [

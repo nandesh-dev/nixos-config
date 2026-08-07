@@ -40,6 +40,7 @@
               "wheel"
               "networkmanager"
               "docker"
+              "dialout"
             ];
           };
 
@@ -66,6 +67,7 @@
                 self.homeModules.git
                 self.homeModules.telegram
                 self.homeModules.development
+                self.homeModules.qgroundcontrol
                 self.homeModules.ssh
                 self.homeModules.sops
                 {

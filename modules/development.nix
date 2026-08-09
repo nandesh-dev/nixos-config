@@ -35,7 +35,7 @@
         buf
 
         black
-        pyright
+        basedpyright
 
         marksman
         vscode-langservers-extracted

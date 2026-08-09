@@ -62,14 +62,23 @@ require("conform").setup({
 		if vim.g.disable_autoformat then
 			return
 		end
-		return { timeout_ms = 5000, lsp_format = "fallback" }
+		return { timeout_ms = 3000, lsp_format = "fallback" }
 	end,
 })
 require("harpoon").setup()
 require("telescope").setup()
 require("stay-centered").setup()
 
+vim.diagnostic.config({
+	virtual_text = {
+		severity = nil,
+	},
+	update_in_insert = true,
+	severity_sort = true,
+})
+
 vim.lsp.enable({
+	"basedpyright",
 	"nil",
 	"lua_ls",
 	"typescript-language-server",
@@ -144,3 +153,4 @@ end)
 vim.keymap.set("n", "<leader>cf", function()
 	require("conform").format({ async = true })
 end)
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)

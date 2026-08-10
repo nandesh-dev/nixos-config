@@ -5,22 +5,46 @@ vim.pack.add({
 	"https://github.com/nvim-lua/plenary.nvim",
 	{ src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
 	"https://github.com/nvim-telescope/telescope.nvim",
-	"https://github.com/hrsh7th/nvim-cmp",
 	"https://github.com/stevearc/conform.nvim",
-	"https://github.com/neovim/nvim-lspconfig",
 	"https://github.com/arnamak/stay-centered.nvim",
+	"https://github.com/kylechui/nvim-surround",
+	"https://github.com/hrsh7th/nvim-cmp",
+	"https://github.com/hrsh7th/cmp-nvim-lsp",
+	"https://github.com/hrsh7th/cmp-path",
+	"https://github.com/neovim/nvim-lspconfig",
+	"https://github.com/akinsho/toggleterm.nvim",
 })
 
-vim.o.number = true
+local plugin = {
+	oil = require("oil"),
+	conform = require("conform"),
+	harpoon = require("harpoon"),
+	telescope = require("telescope"),
+	telescopebuiltin = require("telescope.builtin"),
+	staycentered = require("stay-centered"),
+	cmp = require("cmp"),
+	cmplsp = require("cmp_nvim_lsp"),
+	surround = require("nvim-surround"),
+	toggleterm = require("toggleterm"),
+	toggletermterminal = require("toggleterm.terminal"),
+}
+
 vim.o.relativenumber = true
 vim.o.wrap = false
 vim.o.tabstop = 4
 vim.o.swapfile = false
+vim.o.winborder = "rounded"
+vim.o.clipboard = "unnamedplus"
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
-require("oil").setup({
+plugin.harpoon.setup()
+plugin.conform.setup()
+plugin.staycentered.setup()
+plugin.surround.setup()
+
+plugin.oil.setup({
 	default_file_explorer = true,
 
 	columns = { "icon" },
@@ -30,12 +54,13 @@ require("oil").setup({
 	keymaps = {
 		["-"] = { "actions.parent", mode = "n" },
 		["<CR>"] = "actions.select",
-		["th"] = { "actions.toggle_hidden", mode = "n" },
-		["tp"] = { "actions.open_cwd", mode = "n" },
+		["hh"] = { "actions.toggle_hidden", mode = "n" },
+		["p"] = { "actions.open_cwd", mode = "n" },
 		["<Esc>"] = { "actions.close", mode = "n" },
 	},
 })
-require("conform").setup({
+
+plugin.conform.setup({
 	formatters_by_ft = {
 		nix = { "nixfmt" },
 		lua = { "stylua" },
@@ -65,9 +90,6 @@ require("conform").setup({
 		return { timeout_ms = 3000, lsp_format = "fallback" }
 	end,
 })
-require("harpoon").setup()
-require("telescope").setup()
-require("stay-centered").setup()
 
 vim.diagnostic.config({
 	virtual_text = {
@@ -86,71 +108,139 @@ vim.lsp.enable({
 	"gopls",
 })
 
-vim.keymap.set("n", "<leader>t", ":Oil<CR>")
-vim.keymap.set("n", "ha", function()
-	require("harpoon"):list():add()
+local capabilities = plugin.cmplsp.default_capabilities()
+vim.lsp.config("*", {
+	capabilities = capabilities,
+})
+
+plugin.cmp.setup({
+	snippet = {
+		expand = function(args)
+			vim.snippet.expand(args.body)
+		end,
+	},
+	window = {
+		completion = plugin.cmp.config.window.bordered(),
+		documentation = plugin.cmp.config.window.bordered(),
+	},
+	mapping = plugin.cmp.mapping.preset.insert({
+		["<C-j>"] = plugin.cmp.mapping.select_next_item(),
+		["<C-k>"] = plugin.cmp.mapping.select_prev_item(),
+		["<C-i>"] = plugin.cmp.mapping.scroll_docs(-4),
+		["<C-o>"] = plugin.cmp.mapping.scroll_docs(4),
+		["<C-Space>"] = plugin.cmp.mapping.complete(),
+		["<C-e>"] = plugin.cmp.mapping.abort(),
+		["<CR>"] = plugin.cmp.mapping.confirm({ select = true }),
+	}),
+	sources = plugin.cmp.config.sources({
+		{ name = "nvim_lsp" },
+		{ name = "path" },
+	}, {
+		{ name = "buffer" },
+	}),
+})
+
+plugin.toggleterm.setup({
+	size = 15,
+	open_mapping = nil,
+	shade_terminals = false,
+	direction = "horizontal",
+	persist_size = true,
+	persist_mode = true,
+})
+
+local Terminal = plugin.toggletermterminal.Terminal
+local terminals = {
+	Terminal:new({ hidden = true }),
+	Terminal:new({ hidden = true }),
+	Terminal:new({ hidden = true }),
+	Terminal:new({ hidden = true }),
+}
+
+vim.api.nvim_create_autocmd("VimLeavePre", {
+	callback = function()
+		for _, term in ipairs(terminals) do
+			if term.job_id then
+				vim.fn.jobstop(term.job_id)
+			end
+		end
+	end,
+})
+
+local map = vim.keymap.set
+
+for i, term in ipairs(terminals) do
+	map("n", "<leader>" .. i, function()
+		term:toggle()
+	end, { desc = "Toggle terminal " .. i })
+end
+map("t", "<Esc><Esc>", [[<C-\><C-n>]], {})
+
+map("n", "<leader>t", ":Oil<CR>")
+map("n", "ha", function()
+	plugin.harpoon:list():add()
 end)
-vim.keymap.set("n", "hw", function()
-	require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
+map("n", "hw", function()
+	plugin.harpoon.ui:toggle_quick_menu(plugin.harpoon:list())
 end)
-vim.keymap.set("n", "h1", function()
-	require("harpoon"):list():select(1)
+map("n", "h1", function()
+	plugin.harpoon:list():select(1)
 end)
-vim.keymap.set("n", "h2", function()
-	require("harpoon"):list():select(2)
+map("n", "h2", function()
+	plugin.harpoon:list():select(2)
 end)
-vim.keymap.set("n", "h3", function()
-	require("harpoon"):list():select(3)
+map("n", "h3", function()
+	plugin.harpoon:list():select(3)
 end)
-vim.keymap.set("n", "h4", function()
-	require("harpoon"):list():select(4)
+map("n", "h4", function()
+	plugin.harpoon:list():select(4)
 end)
-vim.keymap.set("n", "h5", function()
-	require("harpoon"):list():select(5)
+map("n", "h5", function()
+	plugin.harpoon:list():select(5)
 end)
-vim.keymap.set("n", "ff", function()
-	require("telescope.builtin").find_files()
+map("n", "ff", function()
+	plugin.telescopebuiltin.find_files()
 end)
-vim.keymap.set("n", "ft", function()
-	require("telescope.builtin").treesitter()
+map("n", "ft", function()
+	plugin.telescopebuiltin.treesitter()
 end)
-vim.keymap.set("n", "flr", function()
-	require("telescope.builtin").lsp_references()
+map("n", "flr", function()
+	plugin.telescopebuiltin.lsp_references()
 end)
-vim.keymap.set("n", "fld", function()
-	require("telescope.builtin").lsp_definitions()
+map("n", "fld", function()
+	plugin.telescopebuiltin.lsp_definitions()
 end)
-vim.keymap.set("n", "fli", function()
-	require("telescope.builtin").lsp_implementations()
+map("n", "fli", function()
+	plugin.telescopebuiltin.lsp_implementations()
 end)
-vim.keymap.set("n", "flt", function()
-	require("telescope.builtin").lsp_type_definitions()
+map("n", "flt", function()
+	plugin.telescopebuiltin.lsp_type_definitions()
 end)
-vim.keymap.set("n", "fls", function()
-	require("telescope.builtin").lsp_document_symbols()
+map("n", "fls", function()
+	plugin.telescopebuiltin.lsp_document_symbols()
 end)
-vim.keymap.set("n", "fg", function()
-	require("telescope.builtin").live_grep()
+map("n", "fg", function()
+	plugin.telescopebuiltin.live_grep()
 end)
-vim.keymap.set("n", "fs", function()
-	require("telescope.builtin").grep_string()
+map("n", "fs", function()
+	plugin.telescopebuiltin.grep_string()
 end)
-vim.keymap.set("n", "fb", function()
-	require("telescope.builtin").current_buffer_fuzzy_find()
+map("n", "fb", function()
+	plugin.telescopebuiltin.current_buffer_fuzzy_find()
 end)
-vim.keymap.set("n", "fd", function()
-	require("telescope.builtin").diagnostics()
+map("n", "fd", function()
+	plugin.telescopebuiltin.diagnostics()
 end)
-vim.keymap.set("n", "fq", function()
-	require("telescope.builtin").quickfix()
+map("n", "fq", function()
+	plugin.telescopebuiltin.quickfix()
 end)
-vim.keymap.set("n", "<leader>cd", function()
+map("n", "<leader>cd", function()
 	vim.g.disable_autoformat = true
 end)
-vim.keymap.set("n", "<leader>ce", function()
+map("n", "<leader>ce", function()
 	vim.g.disable_autoformat = false
 end)
-vim.keymap.set("n", "<leader>cf", function()
-	require("conform").format({ async = true })
+map("n", "<leader>cf", function()
+	plugin.conform.format({ async = true })
 end)
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
+map("n", "<leader>e", vim.diagnostic.open_float)

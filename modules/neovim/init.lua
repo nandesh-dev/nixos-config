@@ -103,7 +103,7 @@ vim.lsp.enable({
 	"basedpyright",
 	"nil",
 	"lua_ls",
-	"typescript-language-server",
+	"ts_ls",
 	"rust-analyzer",
 	"gopls",
 })

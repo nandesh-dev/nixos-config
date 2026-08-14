@@ -70,6 +70,7 @@
                 self.homeModules.qgroundcontrol
                 self.homeModules.ssh
                 self.homeModules.sops
+                self.homeModules.blender
                 {
                   home.username = "nandesh";
                   home.homeDirectory = "/home/nandesh";

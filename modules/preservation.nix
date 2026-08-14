@@ -7,6 +7,26 @@
         inputs.preservation.nixosModules.default
       ];
 
+      systemd.services.clean-downloads = {
+        description = "Delete Downloads items older than 7 days";
+
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "${pkgs.findutils}/bin/find /home/nandesh/Downloads -mindepth 1 -maxdepth 1 -mtime +7 -exec ${pkgs.coreutils}/bin/rm -rf -- {} +";
+        };
+      };
+
+      systemd.timers.clean-downloads = {
+        description = "Run Downloads cleanup daily";
+
+        wantedBy = [ "timers.target" ];
+
+        timerConfig = {
+          OnCalendar = "daily";
+          Persistent = true;
+        };
+      };
+
       preservation = {
         enable = true;
 
@@ -46,6 +66,7 @@
               ".arduinoIDE"
               ".arduino15"
               "Documents"
+              "Downloads"
               "Projects"
             ];
             files = [ ];

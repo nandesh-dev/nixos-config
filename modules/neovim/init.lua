@@ -54,8 +54,8 @@ plugin.oil.setup({
 	keymaps = {
 		["-"] = { "actions.parent", mode = "n" },
 		["<CR>"] = "actions.select",
-		["hh"] = { "actions.toggle_hidden", mode = "n" },
-		["p"] = { "actions.open_cwd", mode = "n" },
+		["<leader>h"] = { "actions.toggle_hidden", mode = "n" },
+		["<leader>p"] = { "actions.open_cwd", mode = "n" },
 		["<Esc>"] = { "actions.close", mode = "n" },
 	},
 })

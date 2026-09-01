@@ -1,5 +1,14 @@
 { self, inputs, ... }:
 {
+  flake.nixosModules.development =
+    { pkgs, lib, ... }:
+    {
+      imports = [
+        inputs.probe-rs-rules.nixosModules.x86_64-linux.default
+      ];
+
+      hardware.probe-rs.enable = true;
+    };
   flake.homeModules.development =
     {
       pkgs,

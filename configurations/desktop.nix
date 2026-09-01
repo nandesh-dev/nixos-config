@@ -24,6 +24,7 @@
       self.nixosModules.sops
       self.nixosModules.pipewire
       self.nixosModules.docker
+      self.nixosModules.development
       self.nixosModules.ssl
       (
         { pkgs, config, ... }:
@@ -41,6 +42,7 @@
               "networkmanager"
               "docker"
               "dialout"
+              "plugdev"
             ];
           };
 
@@ -65,10 +67,13 @@
                 self.homeModules.gtk
                 self.homeModules.arduino
                 self.homeModules.git
+                self.homeModules.prismlauncher
                 self.homeModules.telegram
                 self.homeModules.development
+                self.homeModules.kicad
                 self.homeModules.qgroundcontrol
                 self.homeModules.ssh
+                self.homeModules.libreoffice
                 self.homeModules.sops
                 self.homeModules.blender
                 {

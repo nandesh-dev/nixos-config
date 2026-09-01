@@ -68,6 +68,7 @@
               "Documents"
               "Downloads"
               "Projects"
+              "Minecraft"
             ];
             files = [ ];
           };

@@ -40,6 +40,7 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    probe-rs-rules.url = "github:jneem/probe-rs-rules";
   };
 
   outputs =

@@ -71,6 +71,7 @@
                 self.homeModules.telegram
                 self.homeModules.development
                 self.homeModules.kicad
+                self.homeModules.obsidian
                 self.homeModules.qgroundcontrol
                 self.homeModules.ssh
                 self.homeModules.libreoffice

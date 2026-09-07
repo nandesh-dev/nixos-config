@@ -48,6 +48,8 @@
 
         marksman
         vscode-langservers-extracted
+
+        inputs.mcp-hub.packages.x86_64-linux.default
       ];
     };
 }

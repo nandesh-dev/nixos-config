@@ -69,6 +69,7 @@
               "Downloads"
               "Projects"
               "Minecraft"
+              "Obsidian"
             ];
             files = [ ];
           };

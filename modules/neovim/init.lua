@@ -13,6 +13,8 @@ vim.pack.add({
 	"https://github.com/hrsh7th/cmp-path",
 	"https://github.com/neovim/nvim-lspconfig",
 	"https://github.com/akinsho/toggleterm.nvim",
+	"https://github.com/ravitemer/mcphub.nvim",
+	"https://github.com/olimorris/codecompanion.nvim",
 })
 
 local plugin = {
@@ -27,6 +29,8 @@ local plugin = {
 	surround = require("nvim-surround"),
 	toggleterm = require("toggleterm"),
 	toggletermterminal = require("toggleterm.terminal"),
+	codecompanion = require("codecompanion"),
+	mcphub = require("mcphub"),
 }
 
 vim.o.relativenumber = true
@@ -38,6 +42,27 @@ vim.o.clipboard = "unnamedplus"
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
+
+plugin.mcphub.setup()
+plugin.codecompanion.setup({
+	interactions = {
+		chat = {
+			adapter = "openrouter",
+			model = "nvidia/nemotron-3.5-lightning:free",
+		},
+	},
+	adapters = {
+		http = {
+			openrouter = function()
+				return require("codecompanion.adapters").extend("openrouter", {
+					env = {
+						api_key = "file:~/.config/nvim/.openrouter",
+					},
+				})
+			end,
+		},
+	},
+})
 
 plugin.harpoon.setup()
 plugin.conform.setup()

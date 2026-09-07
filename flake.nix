@@ -41,6 +41,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     probe-rs-rules.url = "github:jneem/probe-rs-rules";
+    mcp-hub.url = "github:ravitemer/mcp-hub";
   };
 
   outputs =

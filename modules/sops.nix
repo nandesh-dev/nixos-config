@@ -73,6 +73,10 @@
             path = "${config.home.homeDirectory}/.ssh/id_ed25519";
             mode = "0600";
           };
+          openrouter = {
+            path = "${config.home.homeDirectory}/.config/nvim/.openrouter";
+            mode = "0600";
+          };
         };
       };
     };

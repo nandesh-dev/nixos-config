@@ -63,6 +63,8 @@
               ".cache/"
               ".ssh/"
               ".config/BraveSoftware/Brave-Browser"
+              ".config/obsidian"
+              ".config/libreoffice"
               ".arduinoIDE"
               ".arduino15"
               "Documents"

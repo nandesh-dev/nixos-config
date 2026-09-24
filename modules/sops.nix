@@ -77,6 +77,18 @@
             path = "${config.home.homeDirectory}/.config/nvim/.openrouter";
             mode = "0600";
           };
+          groq = {
+            path = "${config.home.homeDirectory}/.config/nvim/.groq";
+            mode = "0600";
+          };
+          nvidia-nim = {
+            path = "${config.home.homeDirectory}/.config/nvim/.nvidia-nim";
+            mode = "0600";
+          };
+          google = {
+            path = "${config.home.homeDirectory}/.config/nvim/.google";
+            mode = "0600";
+          };
         };
       };
     };

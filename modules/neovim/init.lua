@@ -15,6 +15,7 @@ vim.pack.add({
 	"https://github.com/akinsho/toggleterm.nvim",
 	"https://github.com/ravitemer/mcphub.nvim",
 	"https://github.com/olimorris/codecompanion.nvim",
+	"https://codeberg.org/andyg/leap.nvim",
 })
 
 local plugin = {
@@ -47,8 +48,8 @@ plugin.mcphub.setup()
 plugin.codecompanion.setup({
 	interactions = {
 		chat = {
-			adapter = "openrouter",
-			model = "nvidia/nemotron-3.5-lightning:free",
+			adapter = "google",
+			model = "gemini-3.8-flash",
 		},
 	},
 	adapters = {
@@ -57,6 +58,45 @@ plugin.codecompanion.setup({
 				return require("codecompanion.adapters").extend("openrouter", {
 					env = {
 						api_key = "file:~/.config/nvim/.openrouter",
+					},
+				})
+			end,
+			nvidianim = function()
+				return require("codecompanion.adapters").extend("openai", {
+					env = {
+						api_key = "file:~/.config/nvim/.nvidia-nim",
+					},
+					url = "https://integrate.api.nvidia.com/v1/chat/completions",
+					schema = {
+						model = {
+							default = "nvidia/nemotron-3.5-lightning-30b-a3b",
+						},
+					},
+				})
+			end,
+			groq = function()
+				return require("codecompanion.adapters").extend("openai", {
+					env = {
+						api_key = "file:~/.config/nvim/.groq",
+					},
+					url = "https://api.groq.com/openai/v1/chat/completions",
+					schema = {
+						model = {
+							default = "openai/gpt-oss-120b",
+						},
+					},
+				})
+			end,
+			google = function()
+				return require("codecompanion.adapters").extend("openai", {
+					env = {
+						api_key = "file:~/.config/nvim/.google",
+					},
+					url = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+					schema = {
+						model = {
+							default = "gemini-3.8-flash",
+						},
 					},
 				})
 			end,
@@ -201,26 +241,29 @@ for i, term in ipairs(terminals) do
 end
 map("t", "<Esc><Esc>", [[<C-\><C-n>]], {})
 
+map("n", "s", "<Plug>(leap)")
+map("n", "S", "<Plug>(leap-from-window)")
+
 map("n", "<leader>t", ":Oil<CR>")
-map("n", "ha", function()
+map("n", "<leader>ha", function()
 	plugin.harpoon:list():add()
 end)
-map("n", "hw", function()
+map("n", "<leader>hw", function()
 	plugin.harpoon.ui:toggle_quick_menu(plugin.harpoon:list())
 end)
-map("n", "h1", function()
+map("n", "<leader>h1", function()
 	plugin.harpoon:list():select(1)
 end)
-map("n", "h2", function()
+map("n", "<leader>h2", function()
 	plugin.harpoon:list():select(2)
 end)
-map("n", "h3", function()
+map("n", "<leader>h3", function()
 	plugin.harpoon:list():select(3)
 end)
-map("n", "h4", function()
+map("n", "<leader>h4", function()
 	plugin.harpoon:list():select(4)
 end)
-map("n", "h5", function()
+map("n", "<leader>h5", function()
 	plugin.harpoon:list():select(5)
 end)
 map("n", "ff", function()
@@ -269,3 +312,4 @@ map("n", "<leader>cf", function()
 	plugin.conform.format({ async = true })
 end)
 map("n", "<leader>e", vim.diagnostic.open_float)
+map("n", "<leader>rn", vim.lsp.buf.rename)

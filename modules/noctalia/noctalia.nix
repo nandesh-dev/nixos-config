@@ -11,6 +11,7 @@
           settingsVersion = 0;
           bar = {
             position = "left";
+            displayMode = "auto_hide";
             widgets = {
               left = [
                 {

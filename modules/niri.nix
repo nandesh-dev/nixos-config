@@ -24,187 +24,322 @@
     {
       imports = [ inputs.niri.homeModules.niri ];
 
-      programs.niri = {
+      home.pointerCursor = {
         enable = true;
+        gtk.enable = true;
+        x11.enable = true;
+        size = 32;
+        name = "GoogleDot-Black";
+        package = pkgs.google-cursor;
+      };
 
-        settings = {
-          input = {
-            mod-key = "Alt";
-          };
+      programs.niri =
+        let
+          noctalia =
+            command:
+            [
+              (lib.getExe inputs.noctalia.packages.${pkgs.system}.default)
+              "ipc"
+              "call"
+            ]
+            ++ lib.splitString " " command;
+        in
+        {
 
-          prefer-no-csd = true;
+          enable = true;
 
-          outputs = {
-            "eDP-1" = {
-              scale = 1;
-            };
-          };
-
-          workspaces = {
-            "01-primary" = {
-              name = "primary";
-            };
-            "02-secondary" = {
-              name = "secondary";
-            };
-            "03-tertiary" = {
-              name = "tertiary";
-            };
-            "04-background" = {
-              name = "background";
-            };
-            "05-chat" = {
-              name = "chat";
-            };
-          };
-
-          layout = {
-            gaps = 8;
-
-            default-column-width = {
-              proportion = 0.5;
+          settings = {
+            input = {
+              mod-key = "Alt";
             };
 
-            preset-column-widths = [
-              { proportion = 0.3; }
-              { proportion = 0.5; }
-              { proportion = 0.7; }
-              { proportion = 1.0; }
-            ];
-          };
+            cursor = {
+              size = 16;
+            };
 
-          spawn-at-startup = [
-            {
-              argv = [
-                (lib.getExe pkgs.vicinae)
-                "server"
-              ];
-            }
-            {
-              argv = [ (lib.getExe inputs.noctalia.packages.${pkgs.system}.default) ];
-            }
-          ];
+            prefer-no-csd = true;
 
-          window-rules = [
-            {
-              border.enable = false;
-              focus-ring.enable = false;
-              opacity = 0.9;
-              geometry-corner-radius = {
-                bottom-left = 12.0;
-                bottom-right = 12.0;
-                top-left = 12.0;
-                top-right = 12.0;
+            outputs = {
+              "eDP-1" = {
+                scale = 1;
               };
-              clip-to-geometry = true;
-            }
-            {
-              matches = [ { is-focused = true; } ];
-              opacity = 1.0;
-            }
-            {
-              matches = [ { app-id = "brave-browser"; } ];
+            };
+
+            workspaces = {
+              "01-primary" = {
+                name = "primary";
+              };
+              "02-secondary" = {
+                name = "secondary";
+              };
+              "03-tertiary" = {
+                name = "tertiary";
+              };
+              "04-background" = {
+                name = "background";
+              };
+              "05-chat" = {
+                name = "chat";
+              };
+            };
+
+            layout = {
+              gaps = 8;
+
               default-column-width = {
-                proportion = 1.0;
+                proportion = 0.5;
               };
-            }
-          ];
-          hotkey-overlay.skip-at-startup = true;
 
-          xwayland-satellite = {
-            path = (lib.getExe pkgs.xwayland-satellite);
-          };
-
-          screenshot-path = "~/Screenshots/%Y-%m-%d_%H-%M-%S.png";
-
-          binds = {
-            "Mod+Return" = {
-              repeat = false;
-              action.spawn = lib.getExe pkgs.kitty;
-            };
-            "Mod+D" = {
-              repeat = false;
-              action.spawn = [
-                (lib.getExe pkgs.vicinae)
-                "toggle"
-              ];
-            };
-            "Mod+B" = {
-              repeat = false;
-              action.spawn = [
-                (lib.getExe pkgs.brave)
-              ];
-            };
-            "Mod+Shift+E" = {
-              repeat = false;
-              action.spawn = [
-                (lib.getExe inputs.noctalia.packages.${pkgs.system}.default)
-                "ipc"
-                "call"
-                "sessionMenu"
-                "toggle"
+              preset-column-widths = [
+                { proportion = 0.3; }
+                { proportion = 0.5; }
+                { proportion = 0.7; }
+                { proportion = 1.0; }
               ];
             };
 
-            "Mod+Q".action.close-window = { };
+            spawn-at-startup = [
+              {
+                argv = [
+                  (lib.getExe pkgs.vicinae)
+                  "server"
+                ];
+              }
+              {
+                argv = [ (lib.getExe inputs.noctalia.packages.${pkgs.system}.default) ];
+              }
+            ];
 
-            "Mod+1".action.focus-workspace = "primary";
-            "Mod+2".action.focus-workspace = "secondary";
-            "Mod+3".action.focus-workspace = "tertiary";
-            "Mod+4".action.focus-workspace = "background";
-            "Mod+5".action.focus-workspace = "chat";
+            window-rules = [
+              {
+                border.enable = false;
+                focus-ring.enable = false;
+                opacity = 0.9;
+                geometry-corner-radius = {
+                  bottom-left = 12.0;
+                  bottom-right = 12.0;
+                  top-left = 12.0;
+                  top-right = 12.0;
+                };
+                clip-to-geometry = true;
+              }
+              {
+                matches = [ { is-focused = true; } ];
+                opacity = 1.0;
+              }
+              {
+                matches = [ { app-id = "brave-browser"; } ];
+                default-column-width = {
+                  proportion = 1.0;
+                };
+              }
+            ];
+            hotkey-overlay.skip-at-startup = true;
 
-            "Mod+Shift+1".action.move-window-to-workspace = "primary";
-            "Mod+Shift+2".action.move-window-to-workspace = "secondary";
-            "Mod+Shift+3".action.move-window-to-workspace = "tertiary";
-            "Mod+Shift+4".action.move-window-to-workspace = "background";
-            "Mod+Shift+5".action.move-window-to-workspace = "chat";
-
-            "Mod+H".action.focus-column-left = { };
-            "Mod+L".action.focus-column-right = { };
-            "Mod+J".action.focus-window-down = { };
-            "Mod+K".action.focus-window-up = { };
-
-            "Mod+Left".action.focus-column-left = { };
-            "Mod+Right".action.focus-column-right = { };
-            "Mod+Down".action.focus-window-down = { };
-            "Mod+Up".action.focus-window-up = { };
-
-            "Mod+Shift+H".action.move-column-left = { };
-            "Mod+Shift+L".action.move-column-right = { };
-            "Mod+Shift+J".action.move-window-down = { };
-            "Mod+Shift+K".action.move-window-up = { };
-
-            "Mod+Shift+Left".action.move-column-left = { };
-            "Mod+Shift+Right".action.move-column-right = { };
-            "Mod+Shift+Down".action.move-window-down = { };
-            "Mod+Shift+Up".action.move-window-up = { };
-
-            "Mod+Ctrl+H".action.focus-monitor-left = { };
-            "Mod+Ctrl+L".action.focus-monitor-right = { };
-            "Mod+Ctrl+J".action.focus-monitor-down = { };
-            "Mod+Ctrl+K".action.focus-monitor-up = { };
-
-            "Mod+Ctrl+1".action.focus-monitor = "eDP-1";
-            "Mod+Ctrl+2".action.focus-monitor = "HDMI-A-1";
-
-            "Mod+Shift+Ctrl+1".action.move-window-to-monitor = "eDP-1";
-            "Mod+Shift+Ctrl+2".action.move-window-to-monitor = "HDMI-A-1";
-
-            "Mod+Minus".action.switch-preset-column-width-back = { };
-            "Mod+Equal".action.switch-preset-column-width = { };
-
-            "Mod+F".action.maximize-column = { };
-
-            "Print".action.screenshot = {
-              show-pointer = false;
+            xwayland-satellite = {
+              path = (lib.getExe pkgs.xwayland-satellite);
             };
-            "Mod+Print".action.screenshot-screen = {
-              show-pointer = false;
+
+            screenshot-path = "~/Screenshots/%Y-%m-%d_%H-%M-%S.png";
+
+            binds = {
+              "Mod+Return" = {
+                repeat = false;
+                action.spawn = lib.getExe pkgs.kitty;
+              };
+              "Mod+D" = {
+                repeat = false;
+                action.spawn = [
+                  (lib.getExe pkgs.vicinae)
+                  "toggle"
+                ];
+              };
+              "Mod+B" = {
+                repeat = false;
+                action.spawn = [
+                  (lib.getExe pkgs.brave)
+                ];
+              };
+              "Mod+Shift+E" = {
+                repeat = false;
+                action.spawn = noctalia "sessionMenu toggle";
+              };
+
+              "Mod+Q".action.close-window = { };
+
+              "Mod+1".action.focus-workspace = "primary";
+              "Mod+2".action.focus-workspace = "secondary";
+              "Mod+3".action.focus-workspace = "tertiary";
+              "Mod+4".action.focus-workspace = "background";
+              "Mod+5".action.focus-workspace = "chat";
+
+              "Mod+Shift+1".action.move-window-to-workspace = "primary";
+              "Mod+Shift+2".action.move-window-to-workspace = "secondary";
+              "Mod+Shift+3".action.move-window-to-workspace = "tertiary";
+              "Mod+Shift+4".action.move-window-to-workspace = "background";
+              "Mod+Shift+5".action.move-window-to-workspace = "chat";
+
+              "Mod+H".action.focus-column-left = { };
+              "Mod+L".action.focus-column-right = { };
+              "Mod+J".action.focus-window-down = { };
+              "Mod+K".action.focus-window-up = { };
+
+              "Mod+Left".action.focus-column-left = { };
+              "Mod+Right".action.focus-column-right = { };
+              "Mod+Down".action.focus-window-down = { };
+              "Mod+Up".action.focus-window-up = { };
+
+              "MouseBack".action.focus-column-left = { };
+              "MouseForward".action.focus-column-right = { };
+
+              "Mod+Shift+H".action.move-column-left = { };
+              "Mod+Shift+L".action.move-column-right = { };
+              "Mod+Shift+J".action.move-window-down = { };
+              "Mod+Shift+K".action.move-window-up = { };
+
+              "Mod+Shift+Left".action.move-column-left = { };
+              "Mod+Shift+Right".action.move-column-right = { };
+              "Mod+Shift+Down".action.move-window-down = { };
+              "Mod+Shift+Up".action.move-window-up = { };
+
+              "Mod+Ctrl+H".action.focus-monitor-left = { };
+              "Mod+Ctrl+L".action.focus-monitor-right = { };
+              "Mod+Ctrl+J".action.focus-monitor-down = { };
+              "Mod+Ctrl+K".action.focus-monitor-up = { };
+
+              "Mod+Ctrl+1".action.focus-monitor = "eDP-1";
+              "Mod+Ctrl+2".action.focus-monitor = "HDMI-A-1";
+
+              "Mod+Shift+Ctrl+1".action.move-window-to-monitor = "eDP-1";
+              "Mod+Shift+Ctrl+2".action.move-window-to-monitor = "HDMI-A-1";
+
+              "Mod+Minus".action.switch-preset-column-width-back = { };
+              "Mod+Equal".action.switch-preset-column-width = { };
+
+              "Mod+F".action.maximize-column = { };
+
+              "Print".action.screenshot = {
+                show-pointer = false;
+              };
+              "Mod+Print".action.screenshot-screen = {
+                show-pointer = false;
+              };
+              "Ctrl+Print".action.screenshot-window = { };
+
+              "Home" = {
+                repeat = false;
+                action.spawn = [
+                  (lib.getExe pkgs.brave)
+                ];
+              };
+
+              "XF86AudioMute" = {
+                repeat = false;
+                action.spawn = noctalia "volume muteOutput";
+              };
+
+              "XF86AudioLowerVolume" = {
+                repeat = false;
+                action.spawn = noctalia "volume decrease";
+              };
+
+              "XF86AudioRaiseVolume" = {
+                repeat = false;
+                action.spawn = noctalia "volume increase";
+              };
+
+              "XF86AudioMicMute" = {
+                repeat = false;
+                action.spawn = noctalia "volume muteInput";
+              };
+
+              "XF86AudioPlay" = {
+                repeat = false;
+                action.spawn = noctalia "media playPause";
+              };
+
+              "XF86MonBrightnessUp" = {
+                repeat = false;
+                action.spawn = noctalia "brightness increase";
+              };
+
+              "XF86MonBrightnessDown" = {
+                repeat = false;
+                action.spawn = noctalia "brightness decrease";
+              };
+
+              "Mod+XF86AudioLowerVolume" = {
+                repeat = false;
+                action.spawn = noctalia "volume decreaseInput";
+              };
+
+              "Mod+XF86AudioRaiseVolume" = {
+                repeat = false;
+                action.spawn = noctalia "volume increaseInput";
+              };
+
+              "Mod+F1" = {
+                repeat = false;
+                action.spawn = noctalia "volume muteOutput";
+              };
+
+              "Mod+F2" = {
+                repeat = false;
+                action.spawn = noctalia "volume decrease";
+              };
+
+              "Mod+F3" = {
+                repeat = false;
+                action.spawn = noctalia "volume increase";
+              };
+
+              "Mod+F4" = {
+                repeat = false;
+                action.spawn = noctalia "volume muteInput";
+              };
+
+              "Mod+F5" = {
+                repeat = false;
+                action.spawn = noctalia "brightness decrease";
+              };
+
+              "Mod+F6" = {
+                repeat = false;
+                action.spawn = noctalia "brightness increase";
+              };
+
+              "Mod+F7" = {
+                repeat = false;
+                action.spawn = noctalia "media playPause";
+              };
+
+              "Mod+F8" = {
+                repeat = false;
+                action.spawn = noctalia "media next";
+              };
+
+              "Mod+F11".action.fullscreen-window = { };
+
+              "Mod+F12".action.screenshot-screen = {
+                show-pointer = false;
+              };
+
+              "Scroll_Lock" = {
+                repeat = false;
+                action.spawn = noctalia "sessionMenu toggle";
+              };
+
+              "XF86Calculator" = {
+                repeat = false;
+                action.spawn = [
+                  (lib.getExe pkgs.vicinae)
+                  "open"
+                  "--query"
+                  "calculator"
+                ];
+              };
             };
-            "Ctrl+Print".action.screenshot-window = { };
           };
         };
-      };
     };
 }

@@ -67,6 +67,7 @@
               ".config/libreoffice"
               ".config/blender"
               ".config/kicad"
+              ".config/FreeCAD"
               ".arduinoIDE"
               ".arduino15"
               "Documents"

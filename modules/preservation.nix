@@ -65,6 +65,7 @@
               ".config/BraveSoftware/Brave-Browser"
               ".config/obsidian"
               ".config/libreoffice"
+              ".config/blender"
               ".arduinoIDE"
               ".arduino15"
               "Documents"

@@ -66,6 +66,7 @@
               ".config/obsidian"
               ".config/libreoffice"
               ".config/blender"
+              ".config/kicad"
               ".arduinoIDE"
               ".arduino15"
               "Documents"

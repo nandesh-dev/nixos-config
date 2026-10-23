@@ -62,6 +62,16 @@
             outputs = {
               "eDP-1" = {
                 scale = 1;
+                position = {
+                  x = 0;
+                  y = 0;
+                };
+              };
+              "HDMI-A-1" = {
+                position = {
+                  x = 0;
+                  y = -1080;
+                };
               };
             };
 

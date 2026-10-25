@@ -95,6 +95,16 @@
             ];
 
           };
+          dock = {
+            enabled = false;
+          };
+          idle = {
+            enabled = true;
+            screenOffTimeout = 60;
+            lockTimeout = 120;
+            suspendTimeout = 1800;
+            fadeDuration = 5;
+          };
           wallpaper = {
             enabled = true;
             directory = ./wallpapers;

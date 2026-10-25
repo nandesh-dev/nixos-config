@@ -116,7 +116,13 @@
                 ];
               }
               {
-                argv = [ (lib.getExe inputs.noctalia.packages.${pkgs.system}.default) ];
+                argv = [
+                  "sh"
+                  "-c"
+                  "${lib.getExe inputs.noctalia.packages.${pkgs.system}.default} & while ! ${
+                    lib.getExe inputs.noctalia.packages.${pkgs.system}.default
+                  } ipc call lockScreen lock 2>/dev/null; do sleep 0.2; done"
+                ];
               }
             ];
 
@@ -199,8 +205,8 @@
               "Mod+Down".action.focus-window-down = { };
               "Mod+Up".action.focus-window-up = { };
 
-              "MouseBack".action.focus-column-left = { };
-              "MouseForward".action.focus-column-right = { };
+              "MouseBack".action.focus-workspace-down = { };
+              "MouseForward".action.focus-workspace-up = { };
 
               "Mod+Shift+H".action.move-column-left = { };
               "Mod+Shift+L".action.move-column-right = { };

@@ -68,6 +68,7 @@
               ".config/blender"
               ".config/kicad"
               ".config/FreeCAD"
+              ".config/texstudio"
               ".arduinoIDE"
               ".arduino15"
               "Documents"

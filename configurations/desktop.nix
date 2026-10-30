@@ -76,6 +76,7 @@
                 self.homeModules.qgroundcontrol
                 self.homeModules.ssh
                 self.homeModules.libreoffice
+                self.homeModules.texstudio
                 self.homeModules.sops
                 self.homeModules.blender
                 {
